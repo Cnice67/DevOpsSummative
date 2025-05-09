@@ -111,7 +111,7 @@ Resources:
       ImageId: !Ref LatestAmiId
       InstanceType: !Ref InstanceType
       SecurityGroupIds:
-        - sg-09394588766b3b1cb
+        -  "sg-09394588766b3b1cb"
       UserData: !Base64 |
         #!/bin/bash
         yum update -y
