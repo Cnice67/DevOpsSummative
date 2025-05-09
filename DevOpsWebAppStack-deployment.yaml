@@ -1,0 +1,6 @@
+template-file-path: AWSTemplateFormatVersion2.yaml
+parameters:
+  InstanceType: t2.micro
+  LatestAmiId: /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2
+  MyIP: 0.0.0.0/0
+tags: {}
