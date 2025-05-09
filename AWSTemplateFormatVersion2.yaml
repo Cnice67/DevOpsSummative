@@ -3,8 +3,7 @@ Description: CloudFormation Template for WebServer with Security Group and EC2 I
 
 Parameters:
   LatestAmiId:
-    Description: The latest Amazon Linux 2 AMI from the Parameter Store
-    Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+    Type: string
     Default: 'ami-0b222423b5198bc6c'
 
   InstanceType:
