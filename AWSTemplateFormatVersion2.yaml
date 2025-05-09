@@ -5,7 +5,7 @@ Parameters:
   LatestAmiId:
     Description: The latest Amazon Linux 2 AMI from the Parameter Store
     Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
-    Default: '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
+    Default: 'ami-0b222423b5198bc6c'
 
   InstanceType:
     Description: WebServer EC2 instance type
