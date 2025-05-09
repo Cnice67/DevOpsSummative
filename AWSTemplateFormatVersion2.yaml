@@ -111,7 +111,7 @@ Resources:
       ImageId: !Ref LatestAmiId
       InstanceType: !Ref InstanceType
       SecurityGroupIds:
-        - !GetAtt WebServerSecurityGroup.GroupId
+        - sg-09394588766b3b1cb
       UserData: !Base64 |
         #!/bin/bash
         yum update -y
