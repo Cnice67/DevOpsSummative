@@ -1,32 +1,21 @@
 version: 0.0
 os: linux
 
-# 1) Copy the built JAR from CodeBuild into /home/ec2-user on the instance
 files:
-  - source: target/DevOpsSummativeApp.jar     # <-- your Maven build output
-    destination: /home/ec2-user/              # <-- where you want it on EC2
+  - source: target/DevOpsSummative-1.0-SNAPSHOT.jar
+    destination: /home/ec2-user/
 
-# 2) Run any lifecycle hooks to stop/start your app
 hooks:
-  # (optional) stop any running instance of the app
   ApplicationStop:
     - location: scripts/stop_app.sh
       timeout: 300
       runas: ec2-user
 
-  # (optional) before install you could back up old files, etc.
-  BeforeInstall:
-    - location: scripts/before_install.sh
-      timeout: 300
-      runas: ec2-user
-
-  # after your new JAR is in place, start it
   ApplicationStart:
     - location: scripts/start_app.sh
       timeout: 300
       runas: ec2-user
 
-  # verify it’s actually serving traffic
   ValidateService:
     - location: scripts/verify_health.sh
       timeout: 300
