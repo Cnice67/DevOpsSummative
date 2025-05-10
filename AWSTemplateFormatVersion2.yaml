@@ -105,7 +105,7 @@ Resources:
           ToPort: '443'
           CidrIp: !Ref MyIP
 # set up web server
-    WebServer:
+  WebServer:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref LatestAmiId
