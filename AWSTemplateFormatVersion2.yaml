@@ -112,6 +112,11 @@ Resources:
       InstanceType: !Ref InstanceType
       SecurityGroupIds:
         -  "sg-09394588766b3b1cb"
+         Tags:
+        - Key: Name
+          Value: DevOpsWebAppServer
+        - Key: App
+          Value: DevOpsSummative
       UserData: !Base64 |
         #!/bin/bash
         yum update -y
