@@ -105,14 +105,14 @@ Resources:
           ToPort: '443'
           CidrIp: !Ref MyIP
 # set up web server
-  WebServer:
+    WebServer:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref LatestAmiId
       InstanceType: !Ref InstanceType
       SecurityGroupIds:
-        -  "sg-09394588766b3b1cb"
-         Tags:
+        - "sg-09394588766b3b1cb"
+      Tags:
         - Key: Name
           Value: DevOpsWebAppServer
         - Key: App
@@ -123,14 +123,10 @@ Resources:
         yum install -y httpd
         systemctl start httpd
         systemctl enable httpd
-        #html
-          cat <<EOF > /var/www/html/index.html
-            ## code here
-            <html><body><h1>Yep, that works</h1></body></html>
-            ## end code
-          EOF
-
-                
+        cat <<EOF > /var/www/html/index.html
+        <html><body><h1>Yep, that works</h1></body></html>
+        EOF
+               
 Outputs:
   WebsiteURL:
     Value: !Join
