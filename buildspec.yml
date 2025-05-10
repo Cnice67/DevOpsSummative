@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+  build:
+    commands:
+      - echo "Building with Maven…"
+      - mvn -B package --file pom.xml
+
+artifacts:
+  files:
+    - target/*.jar
+    - appspec.yml
+    - scripts/**/*
+    - AWSTemplateFormatVersion2.yaml
+    - DevOpsWebAppStack-deployment.yaml
