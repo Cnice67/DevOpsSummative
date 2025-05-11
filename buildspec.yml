@@ -6,10 +6,9 @@ phases:
       java: corretto17
   build:
     commands:
-      - echo "=== PWD: $(pwd) ===" 
-      - echo "=== Directory tree ==="
+      - echo "Directory tree"
       - ls -R .
-      - echo "=== Now running mvn ==="
+      - echo "Now running mvn"
       - mvn -B package --file pom.xml
 
 artifacts:
