@@ -13,8 +13,10 @@ phases:
 
 artifacts:
   files:
+    - artifacts:
+  files:
     - target/*.jar
     - appspec.yml
-    - scripts/**/*
-    - AWSTemplateFormatVersion2.yaml
-    - DevOpsWebAppStack-deployment.yaml
+    - scripts/**/*.sh
+    - scripts/AWSTemplateFormatVersion2.yaml
+    - scripts/DevOpsWebAppStack-deployment.yaml
