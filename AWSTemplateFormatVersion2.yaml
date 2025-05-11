@@ -120,25 +120,25 @@ Resources:
         - Key: App
           Value: DevOpsSummative
 
-    UserData: !Base64 |
-      #!/bin/bash
-      yum update -y
-      yum install -y java-17-amazon-corretto-devel httpd
-      # start your Spring Boot app:
-      nohup java -jar /home/ec2-user/DevOpsSummative-1.0-SNAPSHOT.jar \
-        --server.port=8080 > /home/ec2-user/app.log 2>&1 &
+      UserData: !Base64 |
+        #!/bin/bash
+        yum update -y
+        yum install -y java-17-amazon-corretto-devel httpd
+        # start your Spring Boot app:
+        nohup java -jar /home/ec2-user/DevOpsSummative-1.0-SNAPSHOT.jar \
+          --server.port=8080 > /home/ec2-user/app.log 2>&1 &
 
-      # enable Apache proxy
-      sed -i 's/^#LoadModule proxy_module/LoadModule proxy_module/' /etc/httpd/conf/httpd.conf
-      sed -i 's/^#LoadModule proxy_http_module/LoadModule proxy_http_module/' /etc/httpd/conf/httpd.conf
+        # enable Apache proxy
+        sed -i 's/^#LoadModule proxy_module/LoadModule proxy_module/' /etc/httpd/conf/httpd.conf
+        sed -i 's/^#LoadModule proxy_http_module/LoadModule proxy_http_module/' /etc/httpd/conf/httpd.conf
 
-      cat <<'EOF' >/etc/httpd/conf.d/proxy.conf
-      ProxyPass        "/" "http://localhost:8080/"
-      ProxyPassReverse "/" "http://localhost:8080/"
-      EOF
+        cat <<'EOF' >/etc/httpd/conf.d/proxy.conf
+        ProxyPass        "/" "http://localhost:8080/"
+        ProxyPassReverse "/" "http://localhost:8080/"
+        EOF
 
-      systemctl enable httpd
-      systemctl start httpd
+        systemctl enable httpd
+        systemctl start httpd
 
 Outputs:
   WebsiteURL:
