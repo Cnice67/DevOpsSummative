@@ -11,13 +11,12 @@ phases:
       - echo "Now running mvn"
       - mvn -B package --file pom.xml
 
+
 artifacts:
-  files:
-    - artifacts:
   files:
     - target/*.jar
     - appspec.yml
     - scripts/**/*.sh
-    - scripts/AWSTemplateFormatVersion2.yaml
-    - scripts/DevOpsWebAppStack-deployment.yaml
-    - target/DevOpsSummative-1.0-SNAPSHOT.jar
+    - scripts/stop_app.sh       # hook #1
+    - scripts/start_app.sh      # hook #2
+    - scripts/verify_health.sh

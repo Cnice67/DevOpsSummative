@@ -1,3 +1,2 @@
 #!/bin/bash
-# gracefully kill any running instance of the JAR
-pkill -f DevOpsSummativeApp.jar || true
+pkill -f DevOpsSummative-1.0-SNAPSHOT.jar || true
