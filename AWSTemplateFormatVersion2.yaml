@@ -105,50 +105,41 @@ Resources:
           ToPort: '443'
           CidrIp: !Ref MyIP
 
-# set up web server
+         
+# # set up web server
   WebServer:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref LatestAmiId
       InstanceType: !Ref InstanceType
       SecurityGroupIds:
-        - !Ref WebServerSecurityGroup
-      UserData: !Base64 |
-        #!/bin/bash
-        yum update -y
-        yum install -y httpd
-        systemctl start httpd
-        systemctl enable httpd
-        #html
-          cat <<EOF > /var/www/html/index.html
-            ## code here
-            <html><body><h1>Yep, that works</h1></body></html>
-            ## end code
-          EOF          
-# # set up web server
-#   WebServer:
-#     Type: AWS::EC2::Instance
-#     Properties:
-#       ImageId: !Ref LatestAmiId
-#       InstanceType: !Ref InstanceType
-#       SecurityGroupIds:
-#         - "sg-09394588766b3b1cb"
-#       Tags:
-#         - Key: Name
-#           Value: DevOpsWebAppServer
-#         - Key: App
-#           Value: DevOpsSummative
+        - "sg-09394588766b3b1cb"
+      Tags:
+        - Key: Name
+          Value: DevOpsWebAppServer
+        - Key: App
+          Value: DevOpsSummative
 
-#     UserData:
-#         Fn::Base64: |
-#           #!/bin/bash
-#           yum update -y
-#           yum install -y httpd -y
-#           systemctl enable httpd
-#           systemctl start httpd
-#           cat <<EOF >/var/www/html/index.html
-#           <html><body><h1>Yep, that works</h1></body></html>
-#           EOF
+    UserData: !Base64 |
+      #!/bin/bash
+      yum update -y
+      yum install -y java-17-amazon-corretto-devel httpd
+      # start your Spring Boot app:
+      nohup java -jar /home/ec2-user/DevOpsSummative-1.0-SNAPSHOT.jar \
+        --server.port=8080 > /home/ec2-user/app.log 2>&1 &
+
+      # enable Apache proxy
+      sed -i 's/^#LoadModule proxy_module/LoadModule proxy_module/' /etc/httpd/conf/httpd.conf
+      sed -i 's/^#LoadModule proxy_http_module/LoadModule proxy_http_module/' /etc/httpd/conf/httpd.conf
+
+      cat <<'EOF' >/etc/httpd/conf.d/proxy.conf
+      ProxyPass        "/" "http://localhost:8080/"
+      ProxyPassReverse "/" "http://localhost:8080/"
+      EOF
+
+      systemctl enable httpd
+      systemctl start httpd
+
 Outputs:
   WebsiteURL:
     Value: !Join
