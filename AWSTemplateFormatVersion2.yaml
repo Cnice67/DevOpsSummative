@@ -118,15 +118,15 @@ Resources:
         - Key: App
           Value: DevOpsSummative
 
-    UserData: !Base64 |
-        #!/bin/bash
-        yum update -y
-        yum install -y httpd
-        systemctl start httpd
-        systemctl enable httpd
-        cat <<EOF > /var/www/html/index.html
-        <html><body><h1>Yep, that works</h1></body></html>
-        EOF
+  UserData: !Base64 |
+      #!/bin/bash
+      yum update -y
+      yum install -y httpd
+      systemctl start httpd
+      systemctl enable httpd
+      cat <<EOF > /var/www/html/index.html
+      <html><body><h1>Yep, that works</h1></body></html>
+      EOF
 
 Outputs:
   WebsiteURL:
