@@ -6,7 +6,10 @@ phases:
       java: corretto17
   build:
     commands:
-      - echo "Building with Maven…"
+      - echo "=== PWD: $(pwd) ===" 
+      - echo "=== Directory tree ==="
+      - ls -R .
+      - echo "=== Now running mvn ==="
       - mvn -B package --file pom.xml
 
 artifacts:
