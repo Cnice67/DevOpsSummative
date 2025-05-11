@@ -16,7 +16,7 @@ artifacts:
   files:
     - target/*.jar
     - appspec.yml
-    - scripts/**/*.sh
+    - scripts/**/*
     - scripts/stop_app.sh       # hook #1
     - scripts/start_app.sh      # hook #2
     - scripts/verify_health.sh
