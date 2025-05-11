@@ -1,4 +1,8 @@
 #!/bin/bash
-# start the JAR in the background and log output
-nohup java -jar /home/ec2-user/DevOpsSummativeApp.jar \
-  > /home/ec2-user/app.log 2>&1 &
+cd /home/ec2-user
+
+# kill any old instance (optional)
+pkill -f DevOpsSummative-1.0-SNAPSHOT.jar || true
+
+# launch in background, redirect logs
+nohup java -jar DevOpsSummative-1.0-SNAPSHOT.jar > app.log 2>&1 &
