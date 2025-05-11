@@ -117,16 +117,25 @@ Resources:
           Value: DevOpsWebAppServer
         - Key: App
           Value: DevOpsSummative
+
       UserData: !Base64 |
         #!/bin/bash
         yum update -y
         yum install -y httpd
-        systemctl start httpd
         systemctl enable httpd
-        cat <<EOF > /var/www/html/index.html
-        <html><body><h1>Yep, that works</h1></body></html>
+
+        # Enable Apache’s proxy modules
+        sed -i 's/^#LoadModule proxy_module/LoadModule proxy_module/' /etc/httpd/conf/httpd.conf
+        sed -i 's/^#LoadModule proxy_http_module/LoadModule proxy_http_module/' /etc/httpd/conf/httpd.conf
+
+        # Tell Apache to forward everything on port 80 to your app on 8080
+        cat <<-'EOF' >/etc/httpd/conf.d/proxy.conf
+        ProxyPass "/" "http://localhost:8080/"
+        ProxyPassReverse "/" "http://localhost:8080/"
         EOF
-               
+
+        systemctl start httpd
+                      
 Outputs:
   WebsiteURL:
     Value: !Join
