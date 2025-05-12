@@ -1,4 +1,4 @@
-package bpp.com.devops;
+package bpp.com.devops.controllers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
