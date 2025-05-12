@@ -19,7 +19,7 @@ phases:
 
   post_build:
     commands:
-      - echo "Running static analysis (PMD & SpotBugs)"
+      - echo "Running static analysis (PMD & SpotBugs)" #Test
       # PMD (fails on violations)
       - mvn pmd:check
       # SpotBugs (fails on any bug above threshold)
