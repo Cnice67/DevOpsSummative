@@ -4,12 +4,26 @@ phases:
   install:
     runtime-versions:
       java: corretto17
+
+  pre_build:
+    commands:
+      - echo "Running unit tests"
+      - mvn -B test      
+
   build:
     commands:
       - echo "Directory tree"
       - ls -R .
       - echo "Now running mvn"
       - mvn -B package --file pom.xml
+
+  post_build:
+    commands:
+      - echo "Running static analysis (PMD & SpotBugs)"
+      # PMD (fails on violations)
+      - mvn pmd:check
+      # SpotBugs (fails on any bug above threshold)
+      - mvn com.github.spotbugs:spotbugs-maven-plugin:check
 
 
 artifacts:
