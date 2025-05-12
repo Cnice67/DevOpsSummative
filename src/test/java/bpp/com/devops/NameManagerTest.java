@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class NameManagerTest {
 
-    private NameManager testObject;
+    private gameManager testObject;
 
     @BeforeEach
     public void setup() {
