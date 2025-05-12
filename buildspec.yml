@@ -15,7 +15,7 @@ phases:
       - echo "Directory tree"
       - ls -R .
       - echo "Now running mvn"
-      - mvn -B package --file pom.xml
+      - mvn -B package --file dom.xml
 
   post_build:
     commands:
