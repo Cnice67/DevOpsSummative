@@ -31,8 +31,8 @@ artifacts:
     - target/*.jar
     - appspec.yml
     - scripts/**/*
-    - scripts/stop_app.sh       # hook #1
-    - scripts/start_app.sh      # hook #2
+    - scripts/stop_app.sh      
+    - scripts/start_app.sh     
     - scripts/verify_health.sh
     - AWSTemplateFormateVersion2.yaml
     - DevOpsWebAppStack-deployment.yaml
